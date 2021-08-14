@@ -17,13 +17,11 @@
             </userTransports>
             <builtin>
                 <initialPeersList>
-                <!-- Repeat this part for each husarnet peer -->
                     <locator>
                         <udpv6>
                             <address>fc94:5260:52aa:8309:4797:b178:6904:e918</address>
                         </udpv6>
                     </locator>
-                <!-- End repeat -->
                 </initialPeersList>
             </builtin>
         </rtps>
