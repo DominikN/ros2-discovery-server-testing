@@ -1,5 +1,18 @@
 # ros2-discovery-server-testing
 
+This repository is for testing [eProsima Discovery Server](https://www.eprosima.com/index.php/resources-all/scalability/discovery-server-an-enhanced-discovery-paradigm-for-dds-ecosystems) together with dockerized ROS 2 nodes connected over the internet using [Husarnet P2P VPN](https://husarnet.com/).
+
+## Get your Husarnet JoinCode
+
+Before running examples 1 and 2. Get your JoinCode, that you will use to connect Docker containers to the same P2P VPN network.
+
+You will find your JoinCode at **https://app.husarnet.com  
+ -> Click on the desired network  
+ -> `Add element` button  
+ -> `Join code` tab**
+
+…and change the `JOINCODE` variable in the `.env` files located in `/2_decentralized_demo` and `/3_discovery_server_demo` folders.
+
 ## Example 2: starting `talker` and `listener` with a preconfigured peers list
 
 change directory to `2_discovery_server_demo` and run:
