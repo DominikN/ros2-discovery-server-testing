@@ -23,7 +23,7 @@
                     <metatrafficUnicastLocatorList>
                         <locator>
                             <udpv6>
-                                <address>fc94:cecc:3189:ae23:cc06:7b07:50fe:e0e9</address>
+                                <address>fc94:0f49:4bf4:4515:9170:1f85:3aa9:2985</address>
                                 <port>11811</port>
                             </udpv6>
                         </locator>
@@ -46,7 +46,7 @@
                                 <metatrafficUnicastLocatorList>
                                     <locator>
                                         <udpv6>
-                                            <address>fc94:cecc:3189:ae23:cc06:7b07:50fe:e0e9</address>
+                                            <address>fc94:0f49:4bf4:4515:9170:1f85:3aa9:2985</address>
                                             <port>11811</port>
                                         </udpv6>
                                     </locator>
