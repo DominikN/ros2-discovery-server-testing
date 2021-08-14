@@ -1,0 +1,99 @@
+version: '2.3'
+
+services:
+
+## =========================== Device 1 =========================== ##
+
+  talker:
+    image: osrf/ros:foxy-desktop
+    restart: unless-stopped
+    volumes: 
+      - ./fastdds_client.xml:/fastdds_husarnet.xml
+    network_mode: service:husarnet-talker
+    command:
+      - bash
+      - -c
+      - |
+          export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+          export FASTRTPS_DEFAULT_PROFILES_FILE=/fastdds_husarnet.xml
+          ros2 run demo_nodes_cpp talker
+
+  husarnet-talker:
+    image: husarnet/husarnet
+    restart: unless-stopped
+    volumes:
+      - /var/lib/husarnet  # This will persist your Husarnet Client keys, thus IP of the container will be stable/the same between (re)boots
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0  # Husarnet is using IPv6 for the internal connections
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    environment: 
+      - HOSTNAME=talker
+    env_file: 
+      - ./.env  # create .env file in the same folder
+    
+## =========================== Device 2 =========================== ##
+
+  listener:
+    image: osrf/ros:foxy-desktop
+    restart: unless-stopped
+    volumes: 
+      - ./fastdds_client.xml:/fastdds_husarnet.xml
+    network_mode: service:husarnet-listener
+    command:
+      - bash
+      - -c
+      - |
+          export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+          export FASTRTPS_DEFAULT_PROFILES_FILE=/fastdds_husarnet.xml
+          ros2 run demo_nodes_cpp listener
+
+  husarnet-listener:
+    image: husarnet/husarnet
+    restart: unless-stopped
+    volumes:
+      - /var/lib/husarnet  # This will persist your Husarnet Client keys, thus IP of the container will be stable/the same between (re)boots
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0  # Husarnet is using IPv6 for the internal connections
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    environment: 
+      - HOSTNAME=listener
+    env_file: 
+      - ./.env  # create .env file in the same folder
+    
+## =========================== Discovery Server (device 3) =========================== ##
+
+  discovery-server:
+    image: osrf/ros:foxy-desktop
+    restart: unless-stopped
+    volumes: 
+      - ./fastdds_server.xml:/fastdds_husarnet.xml
+    network_mode: service:husarnet-discovery-server
+    command:
+      - bash
+      - -c
+      - |
+          export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
+          export FASTRTPS_DEFAULT_PROFILES_FILE=/fastdds_husarnet.xml
+          ros2 run demo_nodes_cpp listener
+
+  husarnet-discovery-server:
+    image: husarnet/husarnet
+    restart: unless-stopped
+    volumes:
+      - /var/lib/husarnet  # This will persist your Husarnet Client keys, thus IP of the container will be stable/the same between (re)boots
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0  # Husarnet is using IPv6 for the internal connections
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    environment: 
+      - HOSTNAME=discovery-server
+    env_file: 
+      - ./.env  # create .env file in the same folder
