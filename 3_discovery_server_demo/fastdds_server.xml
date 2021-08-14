@@ -9,7 +9,7 @@
             </transport_descriptor>
         </transport_descriptors>
 
-        <participant profile_name="server_profile" is_default_profile="true" >
+        <participant profile_name="server_profile" is_default_profile="true">
             <rtps>
                 <userTransports>
                     <transport_id>udpv6_transport</transport_id>
@@ -24,6 +24,7 @@
                         <locator>
                             <udpv6>
                                 <address>fc94:1aa2:ab58:1920:4087:142b:c564:28f8</address>
+                                <port>11811</port>
                             </udpv6>
                         </locator>
                     </metatrafficUnicastLocatorList>
@@ -31,5 +32,30 @@
             </rtps>
         </participant>
 
+        <participant profile_name="client_profile" >
+            <rtps>
+                <userTransports>
+                    <transport_id>udpv6_transport</transport_id>
+                </userTransports>
+                <useBuiltinTransports>false</useBuiltinTransports>
+                <builtin>
+                    <discovery_config>
+                        <discoveryProtocol>CLIENT</discoveryProtocol>
+                        <discoveryServersList>
+                            <RemoteServer prefix="44.49.53.43.53.45.52.56.45.52.5F.31">
+                                <metatrafficUnicastLocatorList>
+                                    <locator>
+                                        <udpv6>
+                                            <address>fc94:1aa2:ab58:1920:4087:142b:c564:28f8</address>
+                                            <port>11811</port>
+                                        </udpv6>
+                                    </locator>
+                                </metatrafficUnicastLocatorList>
+                            </RemoteServer>
+                        </discoveryServersList>
+                    </discovery_config>
+                </builtin>
+            </rtps>
+        </participant>
     </profiles>
 </dds>
