@@ -31,31 +31,5 @@
                 </builtin>
             </rtps>
         </participant>
-
-        <participant profile_name="client_profile" >
-            <rtps>
-                <userTransports>
-                    <transport_id>udpv6_transport</transport_id>
-                </userTransports>
-                <useBuiltinTransports>false</useBuiltinTransports>
-                <builtin>
-                    <discovery_config>
-                        <discoveryProtocol>CLIENT</discoveryProtocol>
-                        <discoveryServersList>
-                            <RemoteServer prefix="44.49.53.43.53.45.52.56.45.52.5F.31">
-                                <metatrafficUnicastLocatorList>
-                                    <locator>
-                                        <udpv6>
-                                            <address>fc94:0f49:4bf4:4515:9170:1f85:3aa9:2985</address>
-                                            <port>11811</port>
-                                        </udpv6>
-                                    </locator>
-                                </metatrafficUnicastLocatorList>
-                            </RemoteServer>
-                        </discoveryServersList>
-                    </discovery_config>
-                </builtin>
-            </rtps>
-        </participant>
     </profiles>
 </dds>

@@ -107,7 +107,7 @@ husarnet-discovery-server_1  | [6142674] joining...
 husarnet-discovery-server_1  | Husarnet IP address: fc94:cecc:3189:ae23:cc06:7b07:50fe:e0e9
 ```
 
-Shut down container ([`ctrl` + `c`]) and copy the given IPv6 address to `fastdds_client.xml` and `fastdds_server.xml` files (note that there are 2 places to paste that).
+Shut down container ([`ctrl` + `c`]) and copy the given IPv6 address to `fastdds_client.xml` and `fastdds_server.xml` files.
 
 Now restart `DDS discovery serve container`:
 
