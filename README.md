@@ -4,7 +4,7 @@ This repository is for testing [eProsima Discovery Server](https://www.eprosima.
 
 ## Get your Husarnet JoinCode
 
-Before running examples 1 and 2. Get your JoinCode, that you will use to connect Docker containers to the same P2P VPN network.
+Before running examples 2 and 3. Get your JoinCode, that you will use to connect Docker containers to the same P2P VPN network.
 
 At first rename `.env.template` files to `.env`.
 
