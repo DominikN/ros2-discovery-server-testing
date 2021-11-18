@@ -6,6 +6,8 @@ This repository is for testing [eProsima Discovery Server](https://www.eprosima.
 
 Before running examples 1 and 2. Get your JoinCode, that you will use to connect Docker containers to the same P2P VPN network.
 
+At first rename `.env.template` files to `.env`.
+
 You will find your JoinCode at **https://app.husarnet.com  
  -> Click on the desired network  
  -> `Add element` button  
@@ -15,7 +17,7 @@ You will find your JoinCode at **https://app.husarnet.com
 
 ## Example 2: starting `talker` and `listener` with a preconfigured peers list
 
-change directory to `2_discovery_server_demo` and run:
+change directory to `2_decentralized_demo` and run:
 
 ### launching listener (dummy start)
 
@@ -122,7 +124,7 @@ husarnet-discovery-server_1  | Husarnet IP address: fc94:cecc:3189:ae23:cc06:7b0
 
 Shut down container ([`ctrl` + `c`]) and copy the given IPv6 address to `fastdds_client.xml` and `fastdds_server.xml` files.
 
-Now restart `DDS discovery serve container`:
+Now restart `DDS discovery server container`:
 
 ```bash
 docker-compose -f docker-compose.discovery-server.yml up
