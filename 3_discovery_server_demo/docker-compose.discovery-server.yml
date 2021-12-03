@@ -1,3 +1,6 @@
+# TL;DR 
+# docker-compose -f docker-compose.discovery-server.yml up
+
 version: '2.3'
 
 services:
@@ -28,6 +31,6 @@ services:
     devices:
       - /dev/net/tun
     environment: 
-      - HOSTNAME=discovery-server
+      - HOSTNAME=awesome-discovery-server
     env_file: 
       - ./.env  # create .env file in the same folder

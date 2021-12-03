@@ -1,3 +1,6 @@
+# TL;DR 
+# docker-compose -f docker-compose.listener.yml up
+
 version: '2.3'
 
 services:
