@@ -6,18 +6,16 @@ version: '2.3'
 services:
 
   listener:
-    image: osrf/ros:foxy-desktop
+    build: .
     restart: unless-stopped
-    volumes: 
-      - ./fastdds_client.xml:/fastdds_husarnet.xml
     network_mode: service:husarnet-listener
     command:
       - bash
       - -c
       - |
           export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-          export FASTRTPS_DEFAULT_PROFILES_FILE=/fastdds_husarnet.xml
-          ros2 run demo_nodes_cpp listener
+          export FASTRTPS_DEFAULT_PROFILES_FILE=/fastdds_client.xml
+          ros2 run demo_nodes_py listener
 
   husarnet-listener:
     image: husarnet/husarnet
