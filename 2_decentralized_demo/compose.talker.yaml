@@ -1,20 +1,14 @@
-version: '2.3'
-
 services:
 
   talker:
-    image: osrf/ros:foxy-desktop
+    build: .
     restart: unless-stopped
-    volumes: 
-      - ./fastdds_talker.xml:/fastdds_husarnet.xml
     network_mode: service:husarnet-talker
-    command:
-      - bash
-      - -c
-      - |
-          export RMW_IMPLEMENTATION=rmw_fastrtps_cpp
-          export FASTRTPS_DEFAULT_PROFILES_FILE=/fastdds_husarnet.xml
-          ros2 run demo_nodes_cpp talker
+    volumes: 
+      - ./dds-config.xml:/dds-config.xml
+    environment:
+      - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
+    command: ros2 run demo_nodes_cpp talker
 
   husarnet-talker:
     image: husarnet/husarnet
