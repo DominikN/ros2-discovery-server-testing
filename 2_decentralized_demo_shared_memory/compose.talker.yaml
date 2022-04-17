@@ -3,7 +3,7 @@ services:
   talker:
     build: .
     network_mode: service:husarnet-talker
-    ipc: host
+    ipc: service:husarnet-talker
     volumes: 
       - ./dds-config.xml:/dds-config.xml
     environment:
@@ -13,7 +13,7 @@ services:
   listener_local:
     build: .
     network_mode: service:husarnet-talker
-    ipc: host
+    ipc: service:husarnet-talker
     volumes: 
       - ./dds-config.xml:/dds-config.xml
     environment:
