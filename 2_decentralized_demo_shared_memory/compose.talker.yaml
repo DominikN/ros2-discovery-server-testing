@@ -1,16 +1,28 @@
 services:
 
-  listener_remote:
+  talker:
     build: .
-    network_mode: service:husarnet-listener
+    network_mode: service:husarnet-talker
+    ipc: host
+    volumes: 
+      - ./dds-config.xml:/dds-config.xml
+    environment:
+      - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
+    command: ros2 run demo_nodes_cpp talker
+
+  listener_local:
+    build: .
+    network_mode: service:husarnet-talker
+    ipc: host
     volumes: 
       - ./dds-config.xml:/dds-config.xml
     environment:
       - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
     command: ros2 run demo_nodes_cpp listener
 
-  husarnet-listener:
+  husarnet-talker:
     image: husarnet/husarnet
+    ipc: shareable
     volumes:
       - /var/lib/husarnet  # This will persist your Husarnet Client keys, thus IP of the container will be stable/the same between (re)boots
     sysctls:
@@ -20,6 +32,5 @@ services:
     devices:
       - /dev/net/tun
     environment: 
-      - HOSTNAME=listener
+      - HOSTNAME=talker
       - JOINCODE=${HUSARNET_JOINCODE}
-    
