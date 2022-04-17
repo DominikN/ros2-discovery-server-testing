@@ -1,8 +1,7 @@
 services:
 
-  talker1:
+  talker:
     build: .
-    restart: unless-stopped
     network_mode: service:husarnet-talker
     volumes: 
       - ./dds-config.xml:/dds-config.xml
@@ -10,19 +9,17 @@ services:
       - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
     command: ros2 run demo_nodes_cpp talker
 
-  talker2:
+  listener_local:
     build: .
-    restart: unless-stopped
     network_mode: service:husarnet-talker
     volumes: 
       - ./dds-config.xml:/dds-config.xml
     environment:
       - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
-    command: ros2 run demo_nodes_cpp talker --ros-args -r chatter:=chatter2
+    command: ros2 run demo_nodes_cpp listener
 
   husarnet-talker:
     image: husarnet/husarnet
-    restart: unless-stopped
     volumes:
       - /var/lib/husarnet  # This will persist your Husarnet Client keys, thus IP of the container will be stable/the same between (re)boots
     sysctls:
@@ -33,5 +30,4 @@ services:
       - /dev/net/tun
     environment: 
       - HOSTNAME=talker
-    env_file: 
-      - ./.env  # create .env file in the same folder
+      - JOINCODE=${HUSARNET_JOINCODE}

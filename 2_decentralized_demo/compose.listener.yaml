@@ -1,6 +1,6 @@
 services:
 
-  listener1:
+  listener_remote:
     build: .
     restart: unless-stopped
     network_mode: service:husarnet-listener
@@ -9,16 +9,6 @@ services:
     environment:
       - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
     command: ros2 run demo_nodes_cpp listener
-
-  listener2:
-    build: .
-    restart: unless-stopped
-    network_mode: service:husarnet-listener
-    volumes: 
-      - ./dds-config.xml:/dds-config.xml
-    environment:
-      - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
-    command: ros2 run demo_nodes_cpp listener --ros-args -r chatter:=chatter2
 
   husarnet-listener:
     image: husarnet/husarnet
@@ -33,6 +23,5 @@ services:
       - /dev/net/tun
     environment: 
       - HOSTNAME=listener
-    env_file: 
-      - ./.env  # create .env file in the same folder
+      - JOINCODE=${HUSARNET_JOINCODE}
     

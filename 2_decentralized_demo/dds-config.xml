@@ -10,6 +10,8 @@
 
         <participant profile_name="husarnet_simple_profile" is_default_profile="true">
             <rtps>
+                <!-- without "useBuiltinTransports" if two containers are within the same network namespace, DDS thinks they are on the same host, so default communication is a shared memory. The line bellow prevents it -->
+                <useBuiltinTransports>false</useBuiltinTransports>
                 <userTransports>
                     <transport_id>udpv6_transport</transport_id>
                 </userTransports>
@@ -18,13 +20,11 @@
                         <locator>
                             <udpv6>
                                 <address>talker</address>
-                                <!-- <address>fc94:e59d:e390:3897:4569:c62:482d:4ac</address> -->
                             </udpv6>
                         </locator>
                         <locator>
                             <udpv6>
                                 <address>listener</address>
-                                <!-- <address>fc94:a84:a5ee:a051:499a:f3ae:1436:80c7</address> -->
                             </udpv6>
                         </locator>    
                     </initialPeersList>
