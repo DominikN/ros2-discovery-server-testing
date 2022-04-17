@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<profiles xmlns="http://www.eprosima.com/XMLSchemas/fastRTPS_Profiles">
-    <transport_descriptors>
-        <transport_descriptor>
-            <transport_id>HusarnetTransport</transport_id>
-            <type>UDPv6</type>
-            <!-- <interfaceWhiteList>
-                <address>fc94:5260:52aa:8309:4797:b178:6904:e918</address>
-            </interfaceWhiteList> -->
-        </transport_descriptor>
-    </transport_descriptors>
+<dds>
+    <profiles xmlns="http://www.eprosima.com/XMLSchemas/fastRTPS_Profiles">
+        <transport_descriptors>
+            <transport_descriptor>
+                <transport_id>udpv6_transport</transport_id>
+                <type>UDPv6</type>
+            </transport_descriptor>
+        </transport_descriptors>
 
-    <participant profile_name="CustomHusarnetParticipant" is_default_profile="true">
-        <rtps>
-            <userTransports>
-                <transport_id>HusarnetTransport</transport_id>
-            </userTransports>
-            <builtin>
-                <initialPeersList>
-                    <locator>
-                        <udpv6>
-                            <address>talker</address>
-                            <!-- <address>fc94:e59d:e390:3897:4569:c62:482d:4ac</address> -->
-                        </udpv6>
-                    </locator>
-                    <locator>
-                        <udpv6>
-                            <address>listener</address>
-                            <!-- <address>fc94:a84:a5ee:a051:499a:f3ae:1436:80c7</address> -->
-                        </udpv6>
-                    </locator>    
-                </initialPeersList>
-            </builtin>
-        </rtps>
-    </participant>
-</profiles>
+        <participant profile_name="husarnet_simple_profile" is_default_profile="true">
+            <rtps>
+                <userTransports>
+                    <transport_id>udpv6_transport</transport_id>
+                </userTransports>
+                <builtin>
+                    <initialPeersList>
+                        <locator>
+                            <udpv6>
+                                <address>talker</address>
+                                <!-- <address>fc94:e59d:e390:3897:4569:c62:482d:4ac</address> -->
+                            </udpv6>
+                        </locator>
+                        <locator>
+                            <udpv6>
+                                <address>listener</address>
+                                <!-- <address>fc94:a84:a5ee:a051:499a:f3ae:1436:80c7</address> -->
+                            </udpv6>
+                        </locator>    
+                    </initialPeersList>
+                </builtin>
+            </rtps>
+        </participant>
+    </profiles>
+</dds>

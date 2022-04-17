@@ -1,6 +1,6 @@
 services:
 
-  talker:
+  talker1:
     build: .
     restart: unless-stopped
     network_mode: service:husarnet-talker
@@ -9,6 +9,16 @@ services:
     environment:
       - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
     command: ros2 run demo_nodes_cpp talker
+
+  talker2:
+    build: .
+    restart: unless-stopped
+    network_mode: service:husarnet-talker
+    volumes: 
+      - ./dds-config.xml:/dds-config.xml
+    environment:
+      - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
+    command: ros2 run demo_nodes_cpp talker --ros-args -r chatter:=chatter2
 
   husarnet-talker:
     image: husarnet/husarnet
