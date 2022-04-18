@@ -1,0 +1,31 @@
+services:
+
+  listener_remote:
+    build: .
+    network_mode: service:husarnet-listener
+    volumes: 
+      - ./dds-config.client.xml:/dds-config.xml
+    environment:
+      - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
+      - DS_HOSTNAME=my-talker
+    command:
+      - bash
+      - -c
+      - |
+          /wait_ds.sh
+          ros2 run demo_nodes_cpp listener
+
+  husarnet-listener:
+    image: husarnet/husarnet
+    volumes:
+      - /var/lib/husarnet  # This will persist your Husarnet Client keys, thus IP of the container will be stable/the same between (re)boots
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0  # Husarnet is using IPv6 for the internal connections
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    environment: 
+      - HOSTNAME=listener
+      - JOINCODE=${HUSARNET_JOINCODE}
+    
