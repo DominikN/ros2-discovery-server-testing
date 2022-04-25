@@ -1,0 +1,38 @@
+# $ docker compose -f compose.talker.yaml up
+services:
+
+  talker:
+    build: .
+    network_mode: service:husarnet-talker
+    ipc: service:husarnet-talker
+    volumes: 
+      - ./dds-config.server.xml:/dds-config.xml
+    environment:
+      - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
+    command: ros2 run demo_nodes_cpp talker
+
+  listener_local:
+    build: .
+    network_mode: service:husarnet-talker
+    ipc: service:husarnet-talker
+    volumes: 
+      - ./dds-config.client.xml:/dds-config.xml
+    environment:
+      - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
+    command: ros2 run demo_nodes_cpp listener
+
+  husarnet-talker:
+    image: husarnet/husarnet
+    ipc: shareable
+    volumes:
+      - /var/lib/husarnet
+      - ./id:/var/lib/husarnet/id
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0  # Husarnet is using IPv6 for the internal connections
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    environment: 
+      - HOSTNAME=my-talker
+      - JOINCODE=${HUSARNET_JOINCODE}
