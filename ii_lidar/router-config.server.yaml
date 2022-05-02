@@ -14,9 +14,8 @@ allowlist:
 
 participants:
   
-  - name: LocalParticipant
-    kind: local
-    domain: 0
+  - name: EchoParticipant
+    kind: echo
 
   - name: ServerWAN
     kind: local-discovery-server

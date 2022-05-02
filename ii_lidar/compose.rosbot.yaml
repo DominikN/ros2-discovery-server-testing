@@ -7,10 +7,14 @@ services:
     image: husarion/rplidar:galactic
     devices:
       - /dev/ttyUSB0
+    environment:
+      - ROS_DOMAIN_ID=1
     command: ros2 launch rplidar_ros2 rplidar_a3_launch.py inverted:=true
 
   talker:
     build: .
+    environment:
+      - ROS_DOMAIN_ID=1
     command: ros2 run demo_nodes_py talker
 
   dds-router-rosbot:
