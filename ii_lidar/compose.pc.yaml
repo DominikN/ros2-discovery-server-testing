@@ -32,7 +32,7 @@ services:
   dds-router-pc:
     image: husarnet/dds-router:experimental
     network_mode: service:husarnet-pc
-    ipc: service:husarnet-pc
+    # ipc: service:husarnet-pc
     environment:
       - DS_HOSTNAME=ds
     volumes:
@@ -41,9 +41,9 @@ services:
 
   husarnet-pc:
     image: husarnet/husarnet
-    ipc: shareable
-    ports:
-      - 3000:3000 #wireshark
+    # ipc: shareable
+    # ports:
+    #   - 3000:3000 #wireshark
     volumes:
       - /var/lib/husarnet
     sysctls:

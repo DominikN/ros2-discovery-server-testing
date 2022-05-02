@@ -30,7 +30,7 @@ services:
   dds-router-rosbot:
     image: husarnet/dds-router:experimental
     network_mode: service:husarnet-rosbot
-    ipc: service:husarnet-rosbot
+    # ipc: service:husarnet-rosbot
     environment:
       - DS_HOSTNAME=ds
     volumes:
@@ -39,9 +39,9 @@ services:
 
   husarnet-rosbot:
     image: husarnet/husarnet
-    ipc: shareable
-    ports:
-      - 3000:3000 #wireshark
+    # ipc: shareable
+    # ports:
+    #   - 3000:3000 #wireshark
     volumes:
       - /var/lib/husarnet 
     sysctls:
