@@ -1,0 +1,31 @@
+# Quick Start
+# $ docker compose -f compose.rosbot.yaml up
+
+services:
+
+  rplidar:
+    image: husarion/rplidar:galactic
+    network_mode: service:husarnet-rosbot
+    devices:
+      - /dev/ttyUSB0
+    volumes:
+      - ./dds-config.server.xml:/dds-config.xml
+    environment:
+      - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
+    command: ros2 launch rplidar_ros2 rplidar_a3_launch.py inverted:=true
+
+  husarnet-rosbot:
+    image: husarnet/husarnet
+    volumes:
+      - /var/lib/husarnet 
+      - ./id_rosbot:/var/lib/husarnet/id
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0 
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    environment:
+      - HOSTNAME=rosbot
+      - JOINCODE=${HUSARNET_JOINCODE}
+

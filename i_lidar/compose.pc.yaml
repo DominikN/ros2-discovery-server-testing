@@ -1,0 +1,29 @@
+# Quick Start
+# $ xhost local:root
+# $ docker compose -f compose.pc.yaml up
+
+services:
+  rviz:
+    image: husarion/rviz2:galactic
+    network_mode: service:husarnet
+    volumes: 
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+      - ./rosbot_pro.rviz:/root/.rviz2/default.rviz
+      - ./dds-config.client.xml:/dds-config.xml
+    environment:
+      - DISPLAY
+      - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
+
+  husarnet:
+    image: husarnet/husarnet
+    volumes:
+      - /var/lib/husarnet
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0 
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    environment:
+      - HOSTNAME=rviz2
+      - JOINCODE=${HUSARNET_JOINCODE}
