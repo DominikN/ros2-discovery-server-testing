@@ -28,7 +28,7 @@ services:
     command: ros2 run demo_nodes_py talker
 
   dds-router-rosbot:
-    image: husarnet/dds-router
+    image: husarnet/dds-router:experimental
     network_mode: service:husarnet-rosbot
     ipc: service:husarnet-rosbot
     environment:
@@ -57,7 +57,7 @@ services:
 # =========
 
   dds-router-ds:
-    image: husarnet/dds-router
+    image: husarnet/dds-router:experimental
     network_mode: service:husarnet-ds
     ipc: service:husarnet-ds
     environment:
