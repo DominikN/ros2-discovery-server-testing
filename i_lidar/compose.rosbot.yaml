@@ -9,7 +9,7 @@ services:
     devices:
       - /dev/ttyUSB0
     volumes:
-      - ./dds-config.server.xml:/dds-config.xml
+      - ./dds-config.client.xml:/dds-config.xml
     environment:
       - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
     command: ros2 launch rplidar_ros2 rplidar_a3_launch.py inverted:=true
@@ -18,7 +18,7 @@ services:
     build: .
     network_mode: service:husarnet-rosbot
     volumes: 
-      - ./dds-config.client.xml:/dds-config.xml
+      - ./dds-config.server.xml:/dds-config.xml
     environment:
       - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
       - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml   

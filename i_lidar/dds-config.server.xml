@@ -19,11 +19,23 @@
                 <builtin>
                     <discovery_config>
                         <discoveryProtocol>SERVER</discoveryProtocol>
-                        <leaseAnnouncement><sec>1</sec><nanosec>0</nanosec></leaseAnnouncement>
+                        <!-- <leaseAnnouncement><sec>1</sec><nanosec>0</nanosec></leaseAnnouncement>
                         <leaseDuration><sec>3</sec><nanosec>0</nanosec></leaseDuration>
 	                    <clientAnnouncementPeriod>
 		                    <nanosec>250000000</nanosec>
-	                    </clientAnnouncementPeriod>
+	                    </clientAnnouncementPeriod> -->
+                        <discoveryServersList>
+                            <RemoteServer prefix="44.49.53.43.53.45.52.56.45.52.5f.30">
+                                <metatrafficUnicastLocatorList>
+                                    <locator>
+                                        <udpv6>
+                                            <address>fc94:7300:8ee6:d069:f5c9:47d7:60d9:151e</address>
+                                            <port>11811</port>
+                                        </udpv6>
+                                    </locator>
+                                </metatrafficUnicastLocatorList>
+                            </RemoteServer>
+                        </discoveryServersList>
                     </discovery_config>
                     <metatrafficUnicastLocatorList>
                         <locator>
