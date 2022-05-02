@@ -30,6 +30,7 @@ services:
 
   husarnet-pc:
     image: husarnet/husarnet
+    ipc: shareable
     volumes:
       - /var/lib/husarnet
     sysctls:

@@ -21,7 +21,7 @@ services:
       - DS_HOSTNAME=rosbot
     volumes:
       - ./router-config.rosbot.yaml:/config.yaml
-    command: bash -c "wait_ds.sh && ddsrouter -c /config.yaml -r 10"
+    command: bash -c "wait_ds.sh && ddsrouter -c /config.yaml -r 10 -d"
 
   husarnet-rosbot:
     image: husarnet/husarnet
