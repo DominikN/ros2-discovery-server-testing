@@ -5,7 +5,7 @@
 services:
   rviz:
     image: husarion/rviz2:galactic
-    network_mode: service:husarnet
+    network_mode: service:husarnet-pc
     volumes: 
       - /tmp/.X11-unix:/tmp/.X11-unix:rw
       - ./rosbot_pro.rviz:/root/.rviz2/default.rviz
@@ -14,7 +14,15 @@ services:
       - DISPLAY
       - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
 
-  husarnet:
+  listener:
+    build: .
+    network_mode: service:husarnet-pc
+    volumes: 
+      - ./dds-config.client.xml:/dds-config.xml
+    environment:
+      - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml   
+
+  husarnet-pc:
     image: husarnet/husarnet
     volumes:
       - /var/lib/husarnet

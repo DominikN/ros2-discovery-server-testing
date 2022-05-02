@@ -14,6 +14,14 @@ services:
       - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml
     command: ros2 launch rplidar_ros2 rplidar_a3_launch.py inverted:=true
 
+  talker:
+    build: .
+    network_mode: service:husarnet-rosbot
+    volumes: 
+      - ./dds-config.client.xml:/dds-config.xml
+    environment:
+      - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml   
+
   husarnet-rosbot:
     image: husarnet/husarnet
     volumes:
