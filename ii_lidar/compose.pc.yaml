@@ -4,15 +4,15 @@
 
 services:
 
-  wireshark:
-    image: lscr.io/linuxserver/wireshark
-    cap_add:
-      - NET_ADMIN
-    network_mode: service:husarnet-pc
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/London
+  # wireshark:
+  #   image: lscr.io/linuxserver/wireshark
+  #   cap_add:
+  #     - NET_ADMIN
+  #   network_mode: service:husarnet-pc
+  #   environment:
+  #     - PUID=1000
+  #     - PGID=1000
+  #     - TZ=Europe/London
 
   rviz:
     image: husarion/rviz2:galactic
