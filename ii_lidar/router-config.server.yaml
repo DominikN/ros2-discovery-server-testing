@@ -24,6 +24,6 @@ participants:
       id: 1
       ros-discovery-server: true
     listening-addresses:
-      - domain: rosbot
+      - domain: ds
         port: 11811
         transport: udp

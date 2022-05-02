@@ -23,9 +23,9 @@ services:
     network_mode: service:husarnet-pc
     ipc: service:husarnet-pc
     environment:
-      - DS_HOSTNAME=rosbot
+      - DS_HOSTNAME=ds
     volumes:
-      - ./router-config.pc.yaml:/config.yaml
+      - ./router-config.client.yaml:/config.yaml
     command: bash -c "wait_ds.sh && ddsrouter -c /config.yaml -r 10 -d"
 
   husarnet-pc:
