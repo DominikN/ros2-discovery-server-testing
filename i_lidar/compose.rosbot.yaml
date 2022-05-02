@@ -20,7 +20,9 @@ services:
     volumes: 
       - ./dds-config.client.xml:/dds-config.xml
     environment:
+      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
       - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml   
+    command: ros2 run demo_nodes_py talker
 
   husarnet-rosbot:
     image: husarnet/husarnet
