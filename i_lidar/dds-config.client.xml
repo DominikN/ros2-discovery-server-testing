@@ -17,7 +17,7 @@
                 <useBuiltinTransports>false</useBuiltinTransports>
                 <builtin>
                     <discovery_config>
-                        <discoveryProtocol>CLIENT</discoveryProtocol>
+                        <discoveryProtocol>SUPER_CLIENT</discoveryProtocol>
                         <!-- <leaseAnnouncement><sec>1</sec><nanosec>0</nanosec></leaseAnnouncement>
                         <leaseDuration><sec>3</sec><nanosec>0</nanosec></leaseDuration>
 	                    <clientAnnouncementPeriod>

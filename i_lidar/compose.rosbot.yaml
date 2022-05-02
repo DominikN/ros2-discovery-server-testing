@@ -16,15 +16,34 @@ services:
 
   talker:
     build: .
-    network_mode: service:husarnet-rosbot
+    network_mode: service:husarnet-ds
     volumes: 
       - ./dds-config.server.xml:/dds-config.xml
     environment:
-      - RMW_IMPLEMENTATION=rmw_fastrtps_cpp
       - FASTRTPS_DEFAULT_PROFILES_FILE=/dds-config.xml   
-    command: ros2 run demo_nodes_py talker
+    command: # https://github.com/ros2/rmw_fastrtps/issues/499#issuecomment-756691339
+      - bash
+      - -c
+      - |
+        ros2 daemon stop
+        ros2 daemon start
+        ros2 run demo_nodes_py talker
 
   husarnet-rosbot:
+    image: husarnet/husarnet
+    volumes:
+      - /var/lib/husarnet 
+    sysctls:
+      - net.ipv6.conf.all.disable_ipv6=0 
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    environment:
+      - HOSTNAME=rosbot
+      - JOINCODE=${HUSARNET_JOINCODE}
+
+  husarnet-ds:
     image: husarnet/husarnet
     volumes:
       - /var/lib/husarnet 
@@ -36,6 +55,5 @@ services:
     devices:
       - /dev/net/tun
     environment:
-      - HOSTNAME=rosbot
+      - HOSTNAME=ds
       - JOINCODE=${HUSARNET_JOINCODE}
-
