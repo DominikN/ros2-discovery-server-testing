@@ -3,6 +3,17 @@
 # $ docker compose -f compose.pc.yaml up
 
 services:
+
+  wireshark:
+    image: lscr.io/linuxserver/wireshark
+    cap_add:
+      - NET_ADMIN
+    network_mode: service:husarnet-pc
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+
   rviz:
     image: husarion/rviz2:galactic
     volumes: 
@@ -31,6 +42,8 @@ services:
   husarnet-pc:
     image: husarnet/husarnet
     ipc: shareable
+    ports:
+      - 3000:3000 #wireshark
     volumes:
       - /var/lib/husarnet
     sysctls:

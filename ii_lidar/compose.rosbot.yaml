@@ -3,6 +3,16 @@
 
 services:
 
+  wireshark:
+    image: lscr.io/linuxserver/wireshark
+    cap_add:
+      - NET_ADMIN
+    network_mode: service:husarnet-rosbot
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+
   rplidar:
     image: husarion/rplidar:galactic
     devices:
@@ -30,6 +40,8 @@ services:
   husarnet-rosbot:
     image: husarnet/husarnet
     ipc: shareable
+    ports:
+      - 3000:3000 #wireshark
     volumes:
       - /var/lib/husarnet 
     sysctls:
