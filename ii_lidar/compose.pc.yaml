@@ -10,12 +10,12 @@ services:
       - ./rosbot_pro.rviz:/root/.rviz2/default.rviz
     environment:
       - DISPLAY
-      - ROS_DOMAIN_ID=1
+      - ROS_DOMAIN_ID=2
 
   listener:
     build: .
     environment:
-      - ROS_DOMAIN_ID=1
+      - ROS_DOMAIN_ID=2
     command: ros2 run demo_nodes_py listener
 
   dds-router-pc:
@@ -25,7 +25,7 @@ services:
     environment:
       - DS_HOSTNAME=ds
     volumes:
-      - ./router-config.client.yaml:/config.yaml
+      - ./router-config.pc.yaml:/config.yaml
     command: bash -c "wait_ds.sh && ddsrouter -c /config.yaml -r 10 -d"
 
   husarnet-pc:

@@ -14,19 +14,20 @@ allowlist:
 
 participants:
   
-  # - name: EchoParticipant
-  #   kind: echo
-
   - name: LocalParticipant
     kind: local
-    domain: 0
+    domain: 2
 
-  - name: ServerWAN
+  - name: ClientWAN
     kind: local-discovery-server
     discovery-server-guid:
-      id: 1
+      id: 3
       ros-discovery-server: true
-    listening-addresses:
-      - domain: ds
-        port: 11811
-        transport: udp
+    connection-addresses:
+      - discovery-server-guid:
+          id: 1
+          ros-discovery-server: true
+        addresses:
+          - domain: ds
+            port: 11811
+            transport: udp
