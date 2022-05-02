@@ -19,6 +19,11 @@
                 <builtin>
                     <discovery_config>
                         <discoveryProtocol>SERVER</discoveryProtocol>
+                        <leaseAnnouncement><sec>1</sec><nanosec>0</nanosec></leaseAnnouncement>
+                        <leaseDuration><sec>3</sec><nanosec>0</nanosec></leaseDuration>
+	                    <clientAnnouncementPeriod>
+		                    <nanosec>250000000</nanosec>
+	                    </clientAnnouncementPeriod>
                     </discovery_config>
                     <metatrafficUnicastLocatorList>
                         <locator>
